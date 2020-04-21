@@ -1,6 +1,8 @@
-# PowerShell-Influx
+# Powershell to InfluxLine Converter
+This is a PowerShell module to convert PowerShell outputs for Telegraf agent to the InfluxLine-Protocol. 
+The Telegraf agents reads the converted outputs and send this to an InfluxDB.
 
-This is a PowerShell module for interacting with the time-series database platform Influx: https://www.influxdata.com/. At the moment the primary purpose is to enable a consistent experience for writing metrics in to Influx via the REST API, UDP or StatsD. 
+This is a fork of the Powershell module [PowerShell-Influx](https://github.com/markwragg/PowerShell-Influx) from markwragg.
 
 # Purpose
 
@@ -10,13 +12,12 @@ This module was written to allow metrics from different sources to be written to
 <img src="http://wragg.io/content/images/2018/02/Grafana-Example-2.png" height=200>  <img src="http://wragg.io/content/images/2018/02/Grafana-TFS-Build-Dashboard.png" height=200>
 </p>
 
-For more details on how to implement these tools, [check out my blog post](http://wragg.io/windows-based-grafana-analytics-platform-via-influxdb-and-powershell/). For more information on how to use the Influx PowerShell module, read on below.
 
 # Installation
 
-The module is published in the PSGallery, so if you have PowerShell 5 can be installed by running:
+Import the module by running:
 ```
-Install-Module Influx -Scope CurrentUser
+Import-Module PSInfluxLineConverter -Scope CurrentUser
 ```
 
 # Usage
@@ -41,31 +42,6 @@ Write-InfluxUDP -Measure Server -Tags @{Hostname=$env:COMPUTERNAME} -Metrics @{M
  
 #StatsD UDP
 Write-Statsd "Server.CPU,Hostname=$($env:COMPUTERNAME):10|g" -IP 1.2.3.4 -Port 8125 -Verbose
-```
-
-This project was created so that PowerShell could be used to routinely query various infrastructure metrics and then send those metrics in to Influx for storage, where they could then be presented via a Grafana dashboard.
-
-As such the module also contains a number of cmdlets for retrieving data various sources. Current implementations include: VMWare, 3PAR, Isilon and TFS. You will find these cmdlets under `\Public\<source>`.
-
-The `Get-SomeMetric` cmdlets return a `Metric` type object which can be consumed by any of the `Write-*` cmdlets above via the pipeline or the `-InputObject' parameter. For example:
-
-```
-# Get metrics for VMWare Datastores and write to Influx via the REST API
-Get-DatastoreMetric | Write-Influx
-
-# Get metrics for 3PAR Systems and write to Influx via the Influx UDP listener
-Get-3ParSystemMetric -SANIPAddress '3.4.5.6' -SANUserName someuser -SANPasswordFile 'C:\some3parpasswordfile.txt' | Write-InfluxUDP
-
-# Get TFS Build data and send to Influx via StatsD (note that Write-StatsD converts the metric object received via the pipleine to StatsD formatted strings automatically)
-Get-TFSBuildMetric -TFSRootURL 'https://mytfsurl.local/tfs' -TFSCollection somecollection -TFSProject someproject -Database tfs | Write-StatsD -Type g
-```
-
-There are also `Send-SomeMetric` cmdlets that were implemented to retrieve metrics from a datasource and send it to Influx via the REST API in one step. These continue to exist for backwards compatibility, but for more flexibility use the `Get-SomeMetric` cmdlets and pipe their results to whatever `Write-*` method you want to use for interacting with Influx.
-
-Results of other Powershell commands or custom objects can be sent to Influx. Simply map the object properties to a Metric object using the ConvertTo-Metric cmdlet.
-```
-#Send data from Get-Process to InfluxDB using the REST API with authentication
-Get-Process -Name <__Processname__> | ConvertTo-Metric -Measure test -MetricProperty CPU,PagedmemorySize -TagProperty Handles,Id,ProcessName | Write-Influx -Database windows_system_monitor -Server http://<__InfluxEndpoint__>:8086 -Credential (Get-Credential) -Verbose
 ```
 
 # Cmdlets
