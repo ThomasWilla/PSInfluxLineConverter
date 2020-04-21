@@ -1,7 +1,5 @@
 # PowerShell-Influx
 
-[![Build Status](https://dev.azure.com/markwragg/GitHub/_apis/build/status/markwragg.PowerShell-Influx?branchName=master)](https://dev.azure.com/markwragg/GitHub/_build/latest?definitionId=4&branchName=master) ![Test Coverage](https://img.shields.io/badge/coverage-96%25-brightgreen.svg?maxAge=60)
-
 This is a PowerShell module for interacting with the time-series database platform Influx: https://www.influxdata.com/. At the moment the primary purpose is to enable a consistent experience for writing metrics in to Influx via the REST API, UDP or StatsD. 
 
 # Purpose
@@ -107,30 +105,5 @@ A full list of implemented cmdlets is provided below for your reference. Use `Ge
 
 Cmdlet                       | Description
 -----------------------------| --------------------------------------------------------------------
-Get-3ParSystemMetric         | Returns a metric object for 3PAR systems.
-Get-3ParVirtualVolumeMetric  | Returns a metric object for 3PAR virtual volumes.
-Get-DatacenterMetric         | Returns a metric object for VMWare datacenters.
-Get-DatastoreClusterMetric   | Returns a metric object for VMWare datastore clusters.
-Get-DatastoreMetric          | Returns a metric object for VMWare datastores.
-Get-HostMetric               | Returns a metric object for VMWare hosts.
-Get-IsilonStoragePoolMetric  | Returns a metric object for Isilon storage pools.
-Get-ResourcePoolMetric       | Returns a metric object for VMWare resource pools.
-Get-TFSBuildMetric           | Returns a metric object for TFS builds.
-Get-VMMetric                 | Returns a metric object for VMWare virtual machines.
-Send-3ParSystemMetric        | Sends metrics via the Influx REST API for 3PAR systems.
-Send-3ParVirtualVolumeMetric | Sends metrics via the Influx REST API for 3PAR virtual volumes.
-Send-DatacenterMetric        | Sends metrics via the Influx REST API for VMWare datacenters.
-Send-DatastoreClusterMetric  | Sends metrics via the Influx REST API for VMWare datastore clusters.
-Send-DatastoreMetric         | Sends metrics via the Influx REST API for VMWare datastores.
-Send-HostMetric              | Sends metrics via the Influx REST API for VMWare hosts.
-Send-IsilonStoragePoolMetric | Sends metrics via the Influx REST API for Isilon storage pools.
-Send-ResourcePoolMetric      | Sends metrics via the Influx REST API for VMWare resource pools.
-Send-TFSBuildMetric          | Sends metrics via the Influx REST API for TFS builds.
-Send-VMMetric                | Sends metrics via the Influx REST API for VMWare virtual machines.
-Write-Influx                 | Writes to Influx via the REST API.
-Write-InfluxUDP              | Writes to Influx via UDP.
-Write-StatsD                 | Writes to Influx via a StatsD listener.
-Send-Statsd                  | Alias of Write-StatsD (for backwards compatibility).
-ConvertTo-StatsDString       | Converts a metric object output from one of the `Get-SomeMetric` cmdlets to StatsD string format. This is also performed automatically if a metric object is piped to `Write-StatsD`.
 ConvertTo-Metric             | Converts the specified properties of any object to a metric object, which can then be easily transmitted to Influx by piping to one of the `Write-` cmdlets.
 ConvertTo-InfluxLineString   | Convert metrics to the Influx line protocol format, output as strings.
