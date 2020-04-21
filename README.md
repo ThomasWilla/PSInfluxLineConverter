@@ -29,5 +29,5 @@ A full list of implemented cmdlets is provided below for your reference. Use `Ge
 
 Cmdlet                       | Description
 -----------------------------| --------------------------------------------------------------------
-ConvertTo-Metric             | Converts the specified properties of any object to a metric object, which can then be easily transmitted to Influx by piping to one of the `Write-` cmdlets.
-ConvertTo-InfluxLineString   | Convert metrics to the Influx line protocol format, output as strings.
+ConvertTo-Metric             | Converts the specified properties of any object to a metric object, which can then be easily transmitted to Influx.
+ConvertTo-InfluxLineString   | Convert metrics to the InfluxLine protocol format, output as strings.
