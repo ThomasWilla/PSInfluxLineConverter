@@ -12,12 +12,22 @@ Import-Module PSInfluxLineConverter -Scope CurrentUser
 ```
 
 # Usage
-For example:
-##Converts the output of "Get-Process" to the InfluxLine-Protocol
+**Example: Converts the output of "Get-Process" to the InfluxLine-Protocol**
 ```
+# Content of PowerShell script "input.get-process.ps1"
 Import-Module PSInfluxLineConverter
 Get-Process | ConvertTo-Metric -Measure win_processes -MetricProperty CPU,PagedmemorySize,Handles -TagProperty Id,ProcessName | ConvertTo-InfluxLineString
 ```
+
+```
+# Content of Telegraf configuration "inputs.exec.get-process.conf"
+[[inputs.exec]]
+commands = ['powershell -NoProfile -File "C:\Program Files\Telegraf\scripts\input.get-process.ps1"']
+data_format = "influx"
+timeout = "1m"
+```
+
+
 **Informations about the example**
 * Measurement = win_process
 * Metric/Fields = CPU, PagedmemorySize, Handles
