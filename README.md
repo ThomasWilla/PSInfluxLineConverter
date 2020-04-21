@@ -68,37 +68,6 @@ Results of other Powershell commands or custom objects can be sent to Influx. Si
 Get-Process -Name <__Processname__> | ConvertTo-Metric -Measure test -MetricProperty CPU,PagedmemorySize -TagProperty Handles,Id,ProcessName | Write-Influx -Database windows_system_monitor -Server http://<__InfluxEndpoint__>:8086 -Credential (Get-Credential) -Verbose
 ```
 
-## Implementation Example
-
-Here is an example script which could be run as a scheduled task every 5 minutes to send stats from various sources in to Influx. Note this requires a number of dependent modules be present such as the VMWare PowerShell cmdlets.
-
-> This script uses the `Send-SomeMetric` cmdlets which combine the equivalent `Get-SomeMetric` cmdlet with `Write-Influx` to transmit metrics in one command via the REST API.
-
-```
-Import-Module Influx
-
-#VMWARE
-Connect-VIServer 1.2.3.4 | Out-Null
-
-Send-HostMetric
-Send-DatastoreMetric
-Send-ResourcePoolMetric
-Send-DatastoreClusterMetric
-Send-DatacenterMetric
-
-#3PAR
-Send-3ParSystemMetric -SANIPAddress '3.4.5.6' -SANUserName someuser -SANPasswordFile 'C:\some3parpasswordfile.txt'
-
-#Isilon
-Import-Module SSLValidation
-Disable-SSLValidation
-
-Send-IsilonStoragePoolMetric -IsilonName someisilon -Cluster test -IsilonPasswordFile 'C:\someIsilonpasswordfile.txt'
-
-#TFS
-Send-TFSBuildMetric -TFSRootURL 'https://mytfsurl.local/tfs' -TFSCollection somecollection -TFSProject someproject -Database tfs
-```
-
 # Cmdlets
 
 A full list of implemented cmdlets is provided below for your reference. Use `Get-Help <cmdlet name>` with these to learn more about their usage.
