@@ -1,4 +1,4 @@
-# Powershell to InfluxLine Converter
+# PowerShell to InfluxLine Converter
 This is a lightweight PowerShell module to convert PowerShell outputs for Telegraf agent to the InfluxLine-Protocol. 
 Then the Telegraf agents reads the converted outputs and send this to an InfluxDB.
 
