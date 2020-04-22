@@ -27,22 +27,17 @@ Function ConvertTo-Metric {
     [cmdletbinding()]
     param(
         [Parameter(ValueFromPipeline = $True, Position = 0)]
-        [Object]
-        $InputObject,
+        [Object] $InputObject,
 
         [Parameter(Mandatory = $true)]
-        [String]
-        $Measure,
+        [String] $Measure,
 
         [Parameter(Mandatory = $true)]
-        [String[]]
-        $MetricProperty,
+        [String[]] $MetricProperty,
 
-        [String[]]
-        $TagProperty,
+        [String[]] $TagProperty,
 
-        [hashtable]
-        $Tags
+        [hashtable] $Tags
     )
     Process {
         ForEach ($ItemObject in $InputObject) {

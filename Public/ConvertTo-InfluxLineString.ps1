@@ -29,27 +29,21 @@ Function ConvertTo-InfluxLineString {
     param (
         [Parameter(ParameterSetName = 'MetricObject', Mandatory = $true, ValueFromPipeline = $True, Position = 0)]
         [PSTypeName('Metric')]
-        [PSObject[]]
-        $InputObject,
+        [PSObject[]] $InputObject,
 
         [Parameter(ParameterSetName = 'Measure', Mandatory = $true, Position = 0)]
-        [string]
-        $Measure,
+        [string] $Measure,
 
         [Parameter(ParameterSetName = 'Measure')]
-        [hashtable]
-        $Tags,
+        [hashtable] $Tags,
         
         [Parameter(ParameterSetName = 'Measure', Mandatory = $true)]
-        [hashtable]
-        $Metrics,
+        [hashtable] $Metrics,
 
         [Parameter(ParameterSetName = 'Measure')]
-        [datetime]
-        $TimeStamp,
+        [datetime] $TimeStamp,
 
-        [switch]
-        $ExcludeEmptyMetric
+        [switch] $ExcludeEmptyMetric
     )
     Begin {
     }
