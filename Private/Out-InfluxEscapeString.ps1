@@ -8,11 +8,11 @@
 .PARAMETER StringType
     The influx object to be escaped: Measurement / FieldTextValue / Other. if not specified defaults to "Other"
 .EXAMPLE
-    'Some ,string=' | Out-InfluxEscapeString
+    'Some ,string=\' | Out-InfluxEscapeString
     
     Result
     -----------
-    Some\ \,string\=
+    Some\ \,string\=\
 #>
 
 Function Out-InfluxEscapeString { 
@@ -29,10 +29,10 @@ Function Out-InfluxEscapeString {
     )
     process {
         Switch ($StringType) {
-            "Measurement" { $String -Replace '(\s|,|\\)', '\$1' }
-            "FieldTextValue" { $String -Replace '("|\\)', '\$1' }
-            "Other" { $String -Replace '(\s|=|,|\\|")', '\$1' }
-            default { $String -Replace '(\s|=|,|\\|")', '\$1' }
+            "Measurement" { $String -Replace '(\s|,)', '\$1' }
+            "FieldTextValue" { $String -Replace '(\s|")', '\$1' }
+            "Other" { $String -Replace '(\s|=|,|")', '\$1' }
+            default { $String -Replace '(\s|=|,|")', '\$1' }
         }
     }
 }
