@@ -47,8 +47,6 @@ ConvertTo-InfluxLineString   | Convert metrics to the InfluxLine protocol format
 
 
 ## License
-Copyright 2020 Robin Hermann
 PSInfluxLineConverter Copyright (C) 2020 Robin Hermann
-This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
-This is free software, and you are welcome to redistribute it
-under certain conditions; type `show c' for details.
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it under certain conditions.
